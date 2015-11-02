@@ -3,7 +3,7 @@
 
   /**
    * Usage pattern
-   * <ds-widget-clock data-gmt-offset="0"></ds-widget-clock> 
+   * <ds-widget-clock data-gmt-offset="0"></ds-widget-clock>
    */
   var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -58,20 +58,20 @@
           date = getDate(o);
           scope.date = date;
           if (o.showDigital) {
-            scope.digital = timeText(date, digitalFormat, gmtOffset, $filter);
+            scope.digital = timeText(date, digitalFormat, $filter);
           }
         };
 
         stopTime = $interval(tick, 1000);
         // watch the expression, and update the UI on change.
         scope.$watch('gmtOffset', function(value, old) {
-          
+
           gmtOffset = value;
           o.gmtOffset = (gmtOffset != null) ? getGMTbase100(gmtOffset) : false;
           if (o.showGmtInfo && o.gmtOffset !== false) {
             scope.gmtInfo = getGMTText(o.gmtOffset);
           }
-          
+
           tick();
         });
         scope.$watch('digitalFormat', function(value, old) {
@@ -173,8 +173,8 @@
     }
   }
 
-  function timeText(d, format, timezone, $filter) {
-    return $filter('date')(d.date, format, timezone);
+  function timeText(d, format, $filter) {
+    return $filter('date')(d.date, format);
   }
 
 })();
